@@ -1,0 +1,13 @@
+include: package:lint/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
+    - '**/generated_plugin_registrant.dart'
+  errors:
+    missing_required_param: error
+    missing_return: error
+    must_be_immutable: error
+    override_on_non_overriding_member: error
+    null_aware_in_condition: error
