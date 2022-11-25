@@ -12,8 +12,7 @@ BigInt bytesToBigInt(Uint8List bytes) {
       return BigInt.from(result);
     }
     final int mid = start + ((end - start) >> 1);
-    final result =
-        read(start, mid) + read(mid, end) * (BigInt.one << ((mid - start) * 8));
+    final result = read(start, mid) + read(mid, end) * (BigInt.one << ((mid - start) * 8));
     return result;
   }
 

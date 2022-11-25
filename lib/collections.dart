@@ -31,6 +31,16 @@ extension IterableX<E> on Iterable<E> {
     return max;
   }
 
+  num? minByOrNull(num Function(E e) f) {
+    if (isEmpty) return null;
+    num min = f(first);
+    for (final element in this) {
+      final val = f(element);
+      if (val < min) min = val;
+    }
+    return min;
+  }
+
   E? getOrNull(int index) {
     if (index >= length || index < 0) return null;
     return elementAt(index);
