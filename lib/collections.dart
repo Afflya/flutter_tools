@@ -8,6 +8,7 @@ mixin CollectionX {}
 
 extension IterableUIntX on Iterable<int> {
   UnmodifiableUint8ListView toUnmodifiableUInt8List() => UnmodifiableUint8ListView(Uint8List.fromList(toList()));
+  Uint8List toUInt8List() => Uint8List.fromList(toList());
 }
 
 extension IterableX<E> on Iterable<E> {
