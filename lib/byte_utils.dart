@@ -39,3 +39,14 @@ extension ByteArrayX on Uint8List {
 extension ByteUtilsStringX on String {
   Uint8List get asBytes => Uint8List.fromList(cv.hex.decode(this));
 }
+
+extension ByteUtilsByteX on int {
+  int getBit(int bit) => this & (1 << bit);
+
+  int setBit(int bit, int value) {
+    return this | (value << bit);
+  }
+}
+
+
+
