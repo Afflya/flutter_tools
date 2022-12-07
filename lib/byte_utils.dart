@@ -41,7 +41,7 @@ extension ByteUtilsStringX on String {
 }
 
 extension ByteUtilsByteX on int {
-  int getBit(int bit) => this & (1 << bit);
+  int getBit(int bit) => this & (1 << bit) == 0 ? 0 : 1;
 
   int setBit(int bit, int value) {
     return this | (value << bit);
