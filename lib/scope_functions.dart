@@ -57,7 +57,7 @@ extension ScopeFunctionsNullable<T> on T? {
   }
 }
 
-T? run<T>(T? Function<T>() block) => block.call();
+T? run<T>(T? Function() block) => block.call();
 
 R? runWith<T, R>(T? it, R? Function(T? it) block) => block.call(it);
 
