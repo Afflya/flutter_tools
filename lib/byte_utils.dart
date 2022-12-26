@@ -34,6 +34,76 @@ Uint8List bigIntToBytes(final BigInt number) {
 
 extension ByteArrayX on Uint8List {
   String get asHex => cv.hex.encode(this);
+
+  int toUInt8() => buffer.asByteData(0, 1).getUint8(0);
+
+  int toUInt16() => buffer.asByteData(0, 2).getUint16(0, Endian.little);
+
+  int toUInt32() => buffer.asByteData(0, 4).getUint32(0, Endian.little);
+
+  BigInt toUInt64() => BigInt.from(buffer.asByteData(0, 8).getUint64(0, Endian.little).toUnsigned(64));
+
+  int toInt8() => buffer.asByteData(0, 1).getUint8(0);
+
+  int toInt16() => buffer.asByteData(0, 2).getInt16(0, Endian.little);
+
+  int toInt32() => buffer.asByteData(0, 4).getInt32(0, Endian.little);
+
+  int toInt64() => buffer.asByteData(0, 8).getInt64(0, Endian.little);
+
+  int? toUInt8Safely() {
+    if (length < Uint8List.bytesPerElement) return null;
+    return toUInt8();
+  }
+
+  int? toUInt16Safely() {
+    if (length < Uint16List.bytesPerElement) return null;
+    return toUInt16();
+  }
+
+  int? toIUInt32Safely() {
+    if (length < Uint32List.bytesPerElement) return null;
+    return toUInt32();
+  }
+
+  BigInt? toUInt64Safely() {
+    if (length < Uint64List.bytesPerElement) return null;
+    return toUInt64();
+  }
+
+  int? toInt8Safely() {
+    if (length < Uint8List.bytesPerElement) return null;
+    return toInt8();
+  }
+
+  int? toInt16Safely() {
+    if (length < Uint16List.bytesPerElement) return null;
+    return toInt16();
+  }
+
+  int? toInt32Safely() {
+    if (length < Uint32List.bytesPerElement) return null;
+    return toInt32();
+  }
+
+  int? toInt64Safely() {
+    if (length < Uint64List.bytesPerElement) return null;
+    return toInt64();
+  }
+
+  double toFloat32() => buffer.asByteData(0, 4).getFloat32(0, Endian.little);
+
+  double toFloat64() => buffer.asByteData(0, 8).getFloat64(0, Endian.little);
+
+  double? toFloat32Safely() {
+    if (length < Float32List.bytesPerElement) return null;
+    return toFloat32();
+  }
+
+  double? toFloat64Safely() {
+    if (length < Float64List.bytesPerElement) return null;
+    return toFloat64();
+  }
 }
 
 extension ByteUtilsStringX on String {
@@ -47,6 +117,3 @@ extension ByteUtilsByteX on int {
     return this | (value << bit);
   }
 }
-
-
-
