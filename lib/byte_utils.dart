@@ -104,6 +104,22 @@ extension ByteArrayX on Uint8List {
     if (length < Float64List.bytesPerElement) return null;
     return toFloat64();
   }
+
+  // without floating point
+  double? toUnsignedDouble() {
+    switch (length) {
+      case 1:
+        return toUInt8Safely()?.toDouble();
+      case 2:
+        return toUInt16Safely()?.toDouble();
+      case 4:
+        return toIUInt32Safely()?.toDouble();
+      case 8:
+        return toUInt64Safely()?.toDouble();
+      default:
+        return null;
+    }
+  }
 }
 
 extension ByteUtilsStringX on String {
