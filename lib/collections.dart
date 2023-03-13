@@ -69,13 +69,13 @@ extension MapX<K, V> on Map<K, V> {
   }
 
   void sortByKeys() {
-    final List<K> _keys = [...keys.toList()];
-    _keys.sort();
+    final List<K> mKeys = [...keys.toList()];
+    mKeys.sort();
 
     final Map<K, V> temp = {}..addAll(this);
     clear();
 
-    for (final k in _keys) {
+    for (final k in mKeys) {
       addAll({k: temp[k] as V});
     }
   }

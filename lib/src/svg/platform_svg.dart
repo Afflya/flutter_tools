@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_tools/scope_functions.dart';
 
 import 'fake_html.dart' if (dart.library.html) 'dart:html' as html;
 import 'fake_ui.dart' if (dart.library.html) 'dart:ui' as ui;
@@ -20,14 +21,12 @@ class PlatformSvg {
     Color? color,
   }) {
     if (kIsWeb) {
-      hashCode ??= String.fromCharCodes(
-          List<int>.generate(128, (i) => _random.nextInt(256)));
-      ui.platformViewRegistry.registerViewFactory('img-svg-$hashCode',
-          (int viewId) {
+      hashCode ??= String.fromCharCodes(List<int>.generate(128, (i) => _random.nextInt(256)));
+      ui.platformViewRegistry.registerViewFactory('img-svg-$hashCode', (int viewId) {
         final String base64 = base64Encode(utf8.encode(svgString));
         final String base64String = 'data:image/svg+xml;base64,$base64';
-        final html.ImageElement element = html.ImageElement(
-            src: base64String, height: width.toInt(), width: width.toInt());
+        final html.ImageElement element =
+            html.ImageElement(src: base64String, height: width.toInt(), width: width.toInt());
         return element;
       });
       return Container(
@@ -81,11 +80,13 @@ class PlatformSvg {
       //     });
     }
 
-    return SvgPicture.asset(assetName,
-        width: width,
-        height: height,
-        fit: fit,
-        color: color,
-        semanticsLabel: semanticsLabel);
+    return SvgPicture.asset(
+      assetName,
+      width: width,
+      height: height,
+      fit: fit,
+      colorFilter: color?.let((it) => ColorFilter.mode(color, BlendMode.srcIn)),
+      semanticsLabel: semanticsLabel,
+    );
   }
 }
