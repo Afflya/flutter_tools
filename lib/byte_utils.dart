@@ -134,4 +134,46 @@ extension ByteUtilsByteX on int {
   int setBit(int bit, int value) {
     return this | (value << bit);
   }
+
+  Uint8List convertToUInt8List(int size) {
+    switch (size) {
+      case 1:
+        return int8ToUInt8List;
+      case 2:
+        return int16ToUInt8List;
+      case 4:
+        return int32ToUInt8List;
+      case 8:
+        return int64ToUInt8List;
+    }
+    throw UnsupportedError('unsupported size');
+  }
+
+  Uint8List get int8ToUInt8List {
+    return Uint8List.fromList([this]);
+  }
+
+  Uint8List get int16ToUInt8List {
+    return Uint8List.fromList([
+      this & 0xff,
+      (this >> 8) & 0xff,
+    ]);
+  }
+
+  Uint8List get int32ToUInt8List {
+    return Uint8List.fromList([
+      this & 0xff,
+      (this >> 8) & 0xff,
+      (this >> 16) & 0xff,
+    ]);
+  }
+
+  Uint8List get int64ToUInt8List {
+    return Uint8List.fromList([
+      this & 0xff,
+      (this >> 8) & 0xff,
+      (this >> 16) & 0xff,
+      (this >> 32) & 0xff,
+    ]);
+  }
 }
