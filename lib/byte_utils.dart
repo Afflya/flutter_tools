@@ -132,7 +132,7 @@ extension ByteUtilsByteX on int {
   int getBit(int bit) => this & (1 << bit) == 0 ? 0 : 1;
 
   int setBit(int bit, int value) {
-    return this | (value << bit);
+    return (this & ~(1 << bit)) + (value << bit);
   }
 
   Uint8List convertToUInt8List(int size) {
