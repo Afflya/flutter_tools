@@ -138,42 +138,58 @@ extension ByteUtilsByteX on int {
   Uint8List convertToUInt8List(int size) {
     switch (size) {
       case 1:
-        return int8ToUInt8List;
+        return uInt8ToUInt8List;
       case 2:
-        return int16ToUInt8List;
+        return uInt16ToUInt8List;
       case 4:
-        return int32ToUInt8List;
+        return uInt32ToUInt8List;
       case 8:
-        return int64ToUInt8List;
+        return uInt64ToUInt8List;
     }
     throw UnsupportedError('unsupported size');
   }
 
-  Uint8List get int8ToUInt8List {
+  Uint8List get uInt8ToUInt8List {
     return Uint8List.fromList([this]);
   }
 
-  Uint8List get int16ToUInt8List {
-    return Uint8List.fromList([
-      this & 0xff,
-      (this >> 8) & 0xff,
-    ]);
+  Uint8List get uInt16ToUInt8List {
+    return Uint8List(2)..asByteDataWithOffset.setUint16(0, this, Endian.little);
   }
 
-  Uint8List get int32ToUInt8List {
-    return Uint8List.fromList([
-      this & 0xff,
-      (this >> 8) & 0xff,
-      (this >> 16) & 0xff,
-    ]);
+  Uint8List get uInt32ToUInt8List {
+    return Uint8List(4)..asByteDataWithOffset.setUint32(0, this, Endian.little);
   }
 
-  Uint8List get int64ToUInt8List {
-    return Uint8List.fromList([
-      this & 0xff,
-      (this >> 8) & 0xff,
-      (this >> 16) & 0xff,
-      (this >> 32) & 0xff,
-    ]);
+  Uint8List get uInt64ToUInt8List {
+    return Uint8List(8)..asByteDataWithOffset.setUint64(0, this, Endian.little);
   }
+
+  // Uint8List get int8ToUInt8List {
+  //   return Uint8List.fromList([this]);
+  // }
+  //
+  // Uint8List get int16ToUInt8List {
+  //   return Uint8List.fromList([
+  //     this & 0xff,
+  //     (this >> 8) & 0xff,
+  //   ]);
+  // }
+  //
+  // Uint8List get int32ToUInt8List {
+  //   return Uint8List.fromList([
+  //     this & 0xff,
+  //     (this >> 8) & 0xff,
+  //     (this >> 16) & 0xff,
+  //   ]);
+  // }
+  //
+  // Uint8List get int64ToUInt8List {
+  //   return Uint8List.fromList([
+  //     this & 0xff,
+  //     (this >> 8) & 0xff,
+  //     (this >> 16) & 0xff,
+  //     (this >> 32) & 0xff,
+  //   ]);
+  // }
 }

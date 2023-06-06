@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tools/scope_functions.dart';
 
-import 'fake_html.dart' if (dart.library.html) 'dart:html' as html;
-import 'fake_ui.dart' if (dart.library.html) 'dart:ui' as ui;
+import 'package:flutter_tools/src/svg/fake_html.dart' if (dart.library.html) 'dart:html' as html;
+import 'package:flutter_tools/src/svg/fake_ui.dart' if (dart.library.html) 'dart:ui' as ui;
 
 // ignore: avoid_classes_with_only_static_members
 class PlatformSvg {
