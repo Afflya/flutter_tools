@@ -48,6 +48,14 @@ extension IterableX<E> on Iterable<E> {
   }
 }
 
+extension IterableMapX<K, V> on Iterable<MapEntry<K, V>> {
+
+  Map<K, V> get asMap => Map.fromEntries(this);
+
+  UnmodifiableMapView<K, V> get asUnmodifiableMap => Map.fromEntries(this).toUnmodifiable();
+
+}
+
 extension ListX<E> on List<E> {
   UnmodifiableListView<E> toUnmodifiable() => UnmodifiableListView(this);
 }
