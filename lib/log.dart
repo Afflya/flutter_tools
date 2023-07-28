@@ -15,7 +15,7 @@ class Log {
     final StackTrace? stackTrace,
   ]) {
     assert(tag != null);
-    _logger.d('$tag: $message', error, stackTrace);
+    _logger.d('$tag: $message', error: error, stackTrace: stackTrace);
   }
 
   static void v(final dynamic tag,
@@ -25,7 +25,7 @@ class Log {
     final StackTrace? stackTrace,
   ]) {
     assert(tag != null);
-    _logger.v('$tag: $message', error, stackTrace);
+    _logger.t('$tag: $message', error: error, stackTrace: stackTrace);
   }
 
   static void e(final dynamic tag,
@@ -35,7 +35,7 @@ class Log {
     final StackTrace? stackTrace,
   ]) {
     assert(tag != null);
-    _logger.e('$tag: $message', error, stackTrace);
+    _logger.e('$tag: $message', error: error, stackTrace: stackTrace);
   }
 
   static void i(final dynamic tag,
@@ -45,7 +45,7 @@ class Log {
     final StackTrace? stackTrace,
   ]) {
     assert(tag != null);
-    _logger.i('$tag: $message', error, stackTrace);
+    _logger.i('$tag: $message', error: error, stackTrace: stackTrace);
   }
 
   static void w(final dynamic tag,
@@ -55,7 +55,7 @@ class Log {
     final StackTrace? stackTrace,
   ]) {
     assert(tag != null);
-    _logger.w('$tag: $message', error, stackTrace);
+    _logger.w('$tag: $message', error: error, stackTrace: stackTrace);
   }
 
   static void wtf(final dynamic tag,
@@ -65,7 +65,7 @@ class Log {
     final StackTrace? stackTrace,
   ]) {
     assert(tag != null);
-    _logger.wtf('$tag: $message', error, stackTrace);
+    _logger.f('$tag: $message', error: error, stackTrace: stackTrace);
   }
 
 }
