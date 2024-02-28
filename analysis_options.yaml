@@ -9,7 +9,6 @@ analyzer:
     missing_return: error
     must_be_immutable: error
     override_on_non_overriding_member: error
-    null_aware_in_condition: error
     always_use_package_imports: error
     sort_pub_dependencies: warning
 

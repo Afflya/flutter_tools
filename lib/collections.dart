@@ -77,7 +77,7 @@ extension MapX<K, V> on Map<K, V> {
   }
 
   void sortByKeys() {
-    final List<K> mKeys = [...keys.toList()];
+    final List<K> mKeys = [...keys];
     mKeys.sort();
 
     final Map<K, V> temp = {}..addAll(this);
