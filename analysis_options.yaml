@@ -5,14 +5,17 @@ analyzer:
     - '**/*.g.dart'
     - '**/generated_plugin_registrant.dart'
   errors:
+    always_use_package_imports: error
+    directives_ordering: error
+    library_private_types_in_public_api: error
     missing_required_param: error
     missing_return: error
     must_be_immutable: error
     override_on_non_overriding_member: error
-    always_use_package_imports: error
-    sort_pub_dependencies: warning
+    sort_pub_dependencies: error
 
 linter:
   rules:
     always_use_package_imports: true
+    directives_ordering: true
     sort_pub_dependencies: true

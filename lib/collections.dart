@@ -12,7 +12,12 @@ extension IterableUIntX on Iterable<int> {
 
 extension IterableX<E> on Iterable<E> {
   Iterable<T> mapNotNull<T>(T? Function(E e) f) {
-    return map(f).where((element) => element != null).cast();
+    final List<T> res = [];
+    for (final e in this) {
+      final r = f(e);
+      if (r != null) res.add(r);
+    }
+    return res;
   }
 
   UnmodifiableListView<E> toUnmodifiableList() => UnmodifiableListView(this);
@@ -48,11 +53,9 @@ extension IterableX<E> on Iterable<E> {
 }
 
 extension IterableMapX<K, V> on Iterable<MapEntry<K, V>> {
-
   Map<K, V> get asMap => Map.fromEntries(this);
 
   UnmodifiableMapView<K, V> get asUnmodifiableMap => Map.fromEntries(this).toUnmodifiable();
-
 }
 
 extension ListX<E> on List<E> {
@@ -66,12 +69,51 @@ extension SetX<E> on Set<E> {
 extension MapX<K, V> on Map<K, V> {
   UnmodifiableMapView<K, V> toUnmodifiable() => UnmodifiableMapView(this);
 
+  Map<K2, V> mapKeys<K2, V2>(K2 Function(K key, V value) convert) {
+    final Map<K2, V> res = {};
+    for (final entry in entries) {
+      final converted = convert(entry.key, entry.value);
+      res[converted] = entry.value;
+    }
+    return res;
+  }
+
+  Map<K2, V> mapKeysNotNull<K2, V2>(K2? Function(K key, V value) convert) {
+    final Map<K2, V> res = {};
+    for (final entry in entries) {
+      final converted = convert(entry.key, entry.value);
+      if (converted == null) continue;
+      res[converted] = entry.value;
+    }
+    return res;
+  }
+
+  Map<K, V2> mapValues<K2, V2>(V2 Function(K key, V value) convert) {
+    final Map<K, V2> res = {};
+    for (final entry in entries) {
+      final converted = convert(entry.key, entry.value);
+      res[entry.key] = converted;
+    }
+    return res;
+  }
+
+  Map<K, V2> mapValuesNotNull<K2, V2>(V2? Function(K key, V value) convert) {
+    final Map<K, V2> res = {};
+    for (final entry in entries) {
+      final converted = convert(entry.key, entry.value);
+      if (converted == null) continue;
+      res[entry.key] = converted;
+    }
+    return res;
+  }
+
   Map<K2, V2> mapNotNull<K2, V2>(MapEntry<K2, V2>? Function(K key, V value) convert) {
     final Map<K2, V2> res = {};
-    forEach((key, value) {
-      final converted = convert(key, value);
-      if (converted != null) res[converted.key] = converted.value;
-    });
+    for (final entry in entries) {
+      final converted = convert(entry.key, entry.value);
+      if (converted == null) continue;
+      res[converted.key] = converted.value;
+    }
     return res;
   }
 
