@@ -10,6 +10,14 @@ extension IterableUIntX on Iterable<int> {
   Uint8List toUInt8List() => Uint8List.fromList(toList());
 }
 
+extension IterableEqX on Iterable? {
+  bool deepEquals(Object? other) => const DeepCollectionEquality().equals(this, other);
+}
+
+extension MacEqX on Map? {
+  bool deepEquals(Object? other) => const DeepCollectionEquality().equals(this, other);
+}
+
 extension IterableX<E> on Iterable<E> {
   List<T> mapNotNull<T>(T? Function(E e) f) {
     final List<T> res = [];
