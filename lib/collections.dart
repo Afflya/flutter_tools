@@ -11,7 +11,7 @@ extension IterableUIntX on Iterable<int> {
 }
 
 extension IterableX<E> on Iterable<E> {
-  Iterable<T> mapNotNull<T>(T? Function(E e) f) {
+  List<T> mapNotNull<T>(T? Function(E e) f) {
     final List<T> res = [];
     for (final e in this) {
       final r = f(e);
