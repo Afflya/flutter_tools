@@ -6,6 +6,14 @@ export 'package:collection/collection.dart';
 
 mixin CollectionX {}
 
+bool mapDeepEquals(Map? a, Map? b) => const DeepCollectionEquality().equals(a, b);
+
+bool iterableDeepEquals<T>(Iterable? a, Iterable? b) => const DeepCollectionEquality().equals(a, b);
+
+bool setDeepEquals<T>(Set? a, Set? b) => const DeepCollectionEquality().equals(a, b);
+
+bool listDeepEquals<T>(List? a, List? b) => const DeepCollectionEquality().equals(a, b);
+
 extension IterableUIntX on Iterable<int> {
   Uint8List toUInt8List() => Uint8List.fromList(toList());
 }
