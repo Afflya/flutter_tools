@@ -3,3 +3,5 @@ extension CastExt on dynamic {
 
   T as<T>() => this as T;
 }
+
+T? tryCast<T>(x) => x is T ? x : null;
