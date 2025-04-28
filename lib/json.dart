@@ -14,22 +14,28 @@ extension JsonStringExt on String {
 }
 
 extension JsonObjectExt on JsonObject {
-  Object? getObj(String key) => (this[key] as Object?);
+  Object getObj(String key) => this[key] as Object;
 
-  T? getAsType<T>(String key) => getObj(key)?.castOrNull();
+  Object? getObjOrNull(String key) => (this[key] as Object?);
 
-  JsonObject? getJsonObj(String key) => this[key] as JsonObject?;
+  T getAsType<T>(String key) => getObj(key).cast();
 
-  List<T>? getListOfType<T>(String key) {
-    return (this[key] as JsonArray?)?.castList();
+  T? getAsTypeOrNull<T>(String key) => getObjOrNull(key)?.castOrNull();
+
+  JsonObject? getJsonObj(String key) => this[key] as JsonObject;
+
+  JsonObject? getJsonObjOrNull(String key) => this[key] as JsonObject?;
+
+  List<T> getListOfType<T>(String key) {
+    return (this[key] as JsonArray).castList();
   }
 
   List<T>? getListOfTypeOrNull<T>(String key) {
     return (this[key] as JsonArray?)?.castListOrNull();
   }
 
-  List<JsonObject>? getListOfJson(String key) {
-    return (this[key] as JsonArray?)?.castList();
+  List<JsonObject> getListOfJson(String key) {
+    return (this[key] as JsonArray).castList();
   }
 
   List<JsonObject>? getListOfJsonOrNull(String key) {
