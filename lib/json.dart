@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_tools/cast.dart';
+import 'package:flutter_tools/collections.dart';
 
 mixin JsonX {}
 
@@ -22,23 +23,47 @@ extension JsonObjectExt on JsonObject {
 
   T? getAsTypeOrNull<T>(String key) => getObjOrNull(key)?.castOrNull();
 
-  JsonObject? getJsonObj(String key) => this[key] as JsonObject;
+  JsonObject getJsonObj(String key) => this[key] as JsonObject;
 
   JsonObject? getJsonObjOrNull(String key) => this[key] as JsonObject?;
 
+  Map<String, T> getStringMapOfType<T>(String key) {
+    return getJsonObj(key).mapValues((k, v) => v.cast<T>());
+  }
+
+  Map<String, T> getStringMapWhereType<T>(String key) {
+    return getJsonObj(key).mapValuesNotNull((k, v) => (v as Object?).castOrNull<T>());
+  }
+
+  Map<String, T>? getStringMapOfTypeOrNull<T>(String key) {
+    return getJsonObjOrNull(key)?.mapValues((k, v) => v.cast<T>());
+  }
+
+  Map<String, T>? getStringMapWhereTypeOrNull<T>(String key) {
+    return getJsonObj(key).mapValuesNotNull((k, v) => (v as Object?).castOrNull<T>());
+  }
+
   List<T> getListOfType<T>(String key) {
     return (this[key] as JsonArray).castList();
+  }
+
+  List<T> getListWhereType<T>(String key) {
+    return (this[key] as JsonArray).whereType<T>().toList();
   }
 
   List<T>? getListOfTypeOrNull<T>(String key) {
     return (this[key] as JsonArray?)?.castListOrNull();
   }
 
+  List<T>? getListWhereTypeOrNull<T>(String key) {
+    return (this[key] as JsonArray?)?.whereType<T>().toList();
+  }
+
   List<JsonObject> getListOfJson(String key) {
-    return (this[key] as JsonArray).castList();
+    return getListOfType(key);
   }
 
   List<JsonObject>? getListOfJsonOrNull(String key) {
-    return (this[key] as JsonArray?)?.castListOrNull();
+    return getListOfTypeOrNull(key);
   }
 }
