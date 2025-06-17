@@ -28,7 +28,7 @@ extension JsonObjectExt on JsonObject {
   JsonObject? getJsonObjOrNull(String key) => this[key] as JsonObject?;
 
   Map<String, T> getStringMapOfType<T>(String key) {
-    return getJsonObj(key).mapValues((k, v) => v.cast<T>());
+    return getJsonObj(key).mapValues((k, v) => (v as Object).cast<T>());
   }
 
   Map<String, T> getStringMapWhereType<T>(String key) {
@@ -36,7 +36,7 @@ extension JsonObjectExt on JsonObject {
   }
 
   Map<String, T>? getStringMapOfTypeOrNull<T>(String key) {
-    return getJsonObjOrNull(key)?.mapValues((k, v) => v.cast<T>());
+    return getJsonObjOrNull(key)?.mapValues((k, v) => (v as Object).cast<T>());
   }
 
   Map<String, T>? getStringMapWhereTypeOrNull<T>(String key) {
