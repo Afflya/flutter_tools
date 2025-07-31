@@ -23,9 +23,9 @@ extension JsonObjectExt on JsonObject {
 
   T? getAsTypeOrNull<T>(String key) => getObjOrNull(key)?.castOrNull();
 
-  JsonObject getJsonObj(String key) => this[key] as JsonObject;
+  JsonObject getJsonObj(String key) => getAsType(key);
 
-  JsonObject? getJsonObjOrNull(String key) => this[key] as JsonObject?;
+  JsonObject? getJsonObjOrNull(String key) => getAsTypeOrNull(key);
 
   Map<String, T> getStringMapOfType<T>(String key) {
     return getJsonObj(key).mapValues((k, v) => (v as Object).cast<T>());
@@ -44,19 +44,19 @@ extension JsonObjectExt on JsonObject {
   }
 
   List<T> getListOfType<T>(String key) {
-    return (this[key] as JsonArray).castList();
+    return getAsType<JsonArray>(key).castList();
   }
 
   List<T> getListWhereType<T>(String key) {
-    return (this[key] as JsonArray).whereType<T>().toList();
+    return getAsType<JsonArray>(key).whereType<T>().toList();
   }
 
   List<T>? getListOfTypeOrNull<T>(String key) {
-    return (this[key] as JsonArray?)?.castListOrNull();
+    return getAsTypeOrNull<JsonArray>(key)?.castListOrNull();
   }
 
   List<T>? getListWhereTypeOrNull<T>(String key) {
-    return (this[key] as JsonArray?)?.whereType<T>().toList();
+    return getAsTypeOrNull<JsonArray>(key)?.whereType<T>().toList();
   }
 
   List<JsonObject> getListOfJson(String key) {
